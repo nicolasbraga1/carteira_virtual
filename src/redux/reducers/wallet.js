@@ -1,17 +1,36 @@
-import { WALLET_FORM_SUBMIT } from '../actions/actionTypes';
+import {
+  REQUEST_START,
+  REQUEST_SUCCESS,
+  REQUEST_FAILED } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   currencies: [],
-  expenses: [],
-  editor: false,
-  idToEdit: 0,
+  error: '',
+  isLoading: false,
 };
 
 function walletReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-  case WALLET_FORM_SUBMIT:
+  case REQUEST_START:
     return {
       ...state,
+      currencies: [],
+      error: '',
+      isLoading: true,
+    };
+  case REQUEST_SUCCESS:
+    return {
+      ...state,
+      currencies: action.payload,
+      error: '',
+      isLoading: false,
+    };
+  case REQUEST_FAILED:
+    return {
+      ...state,
+      currencies: [],
+      error: action.payload,
+      isLoading: false,
     };
   default:
     return state;

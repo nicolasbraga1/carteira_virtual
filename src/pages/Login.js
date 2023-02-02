@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import loginAction from '../redux/actions/index';
+import { loginAction } from '../redux/actions/index';
 
 class Login extends React.Component {
   state = {
@@ -38,22 +38,26 @@ class Login extends React.Component {
     return (
       <div>
         <form>
-          <input
-            type="email"
-            name="inputEmail"
-            placeholder="Email"
-            value={ inputEmail }
-            onChange={ this.handleChange }
-            data-testid="email-input"
-          />
-          <input
-            type="password"
-            name="inputPassword"
-            placeholder="Senha"
-            value={ inputPassword }
-            onChange={ this.handleChange }
-            data-testid="password-input"
-          />
+          <label htmlFor="inputEmail">
+            Email
+            <input
+              type="email"
+              name="inputEmail"
+              value={ inputEmail }
+              onChange={ this.handleChange }
+              data-testid="email-input"
+            />
+          </label>
+          <label htmlFor="inputPassword">
+            Senha
+            <input
+              type="password"
+              name="inputPassword"
+              value={ inputPassword }
+              onChange={ this.handleChange }
+              data-testid="password-input"
+            />
+          </label>
           <button
             type="button"
             disabled={ buttonDisabled }
