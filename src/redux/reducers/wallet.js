@@ -1,16 +1,28 @@
 import {
   REQUEST_START,
   REQUEST_SUCCESS,
-  REQUEST_FAILED } from '../actions/actionTypes';
+  REQUEST_FAILED,
+  ADD_EXPENSE } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   currencies: [],
+  expenses: [],
   error: '',
   isLoading: false,
 };
 
 function walletReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+  case ADD_EXPENSE:
+    return {
+      ...state,
+      expenses: [
+        ...state.expenses, {
+          id: state.expenses.length,
+          ...action.payload,
+        },
+      ],
+    };
   case REQUEST_START:
     return {
       ...state,
