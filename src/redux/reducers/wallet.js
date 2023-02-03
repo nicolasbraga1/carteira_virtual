@@ -5,7 +5,7 @@ import {
   ADD_EXPENSE } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-  currencies: [],
+  currencies: ['USD'],
   expenses: [],
   error: '',
   isLoading: false,
