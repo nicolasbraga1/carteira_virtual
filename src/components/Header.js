@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const formatCurrency = (value) => (
+const formatValue = (value) => (
   Math.round(value * 100) / 100).toFixed(2);
 
-const sumTotal = (expenses) => formatCurrency(
+const sumTotal = (expenses) => formatValue(
   expenses.length > 0
     ? expenses.reduce((acc, { currency, exchangeRates, value }) => {
       const exchangedValue = parseFloat(exchangeRates[currency].ask) * value;

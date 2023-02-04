@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+const formatValue = (value) => (
+  Math.round(value * 100) / 100).toFixed(2);
 
 class Table extends Component {
   render() {
+    const { wallet: { expenses } } = this.props;
     return (
       <div>
         <table>
@@ -18,10 +24,40 @@ class Table extends Component {
               <th>Editar/Excluir</th>
             </tr>
           </thead>
+          <tbody>
+            {expenses.map(({
+              id,
+              description,
+              tag,
+              method,
+              value,
+              currency,
+              exchangeRates,
+            }) => (
+              <tr key={ id }>
+                <td>{ description }</td>
+                <td>{ tag }</td>
+                <td>{ method }</td>
+                <td>{ formatValue(value) }</td>
+                <td>{ exchangeRates[currency].name }</td>
+                <td>{ formatValue(exchangeRates[currency].ask) }</td>
+                <td>{ formatValue(exchangeRates[currency].ask * value) }</td>
+                <td>Real Brasileiro</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     );
   }
 }
 
-export default Table;
+Table.propTypes = {
+  wallet: PropTypes.shape({
+    expenses: PropTypes.shape([]),
+  }),
+}.isRequired;
+
+const mapStateToProps = (state) => state;
+
+export default connect(mapStateToProps)(Table);
