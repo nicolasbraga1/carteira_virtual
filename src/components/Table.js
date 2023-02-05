@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteAction } from '../redux/actions/index';
 
 const formatValue = (value) => (
   Math.round(value * 100) / 100).toFixed(2);
 
 class Table extends Component {
+  deleteBTN = (e) => {
+    const { dispatch } = this.props;
+    dispatch(deleteAction(e));
+  };
+
   render() {
     const { wallet: { expenses } } = this.props;
     return (
@@ -43,6 +49,15 @@ class Table extends Component {
                 <td>{ formatValue(exchangeRates[currency].ask) }</td>
                 <td>{ formatValue(exchangeRates[currency].ask * value) }</td>
                 <td>Real Brasileiro</td>
+                <td>
+                  <button
+                    type="submit"
+                    onClick={ () => this.deleteBTN(id) }
+                    data-testid="delete-btn"
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -56,6 +71,7 @@ Table.propTypes = {
   wallet: PropTypes.shape({
     expenses: PropTypes.shape([]),
   }),
+  dispatch: PropTypes.func,
 }.isRequired;
 
 const mapStateToProps = (state) => state;

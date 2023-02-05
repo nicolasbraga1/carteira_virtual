@@ -3,7 +3,8 @@ import {
   REQUEST_START,
   REQUEST_SUCCESS,
   REQUEST_FAILED,
-  ADD_EXPENSE } from './actionTypes';
+  ADD_EXPENSE,
+  DELETE_EXPENSE } from './actionTypes';
 
 export const loginAction = (email) => ({
   type: LOGIN_FORM_SUBMIT,
@@ -50,3 +51,8 @@ export function fetchExpenses(expenses) {
       .catch((error) => dispatch(failedAction(error)));
   };
 }
+
+export const deleteAction = (id) => ({
+  type: DELETE_EXPENSE,
+  payload: id,
+});
