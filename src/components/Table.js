@@ -51,7 +51,7 @@ class Table extends Component {
                 <td>Real Brasileiro</td>
                 <td>
                   <button
-                    type="submit"
+                    type="button"
                     onClick={ () => this.deleteBTN(id) }
                     data-testid="delete-btn"
                   >
